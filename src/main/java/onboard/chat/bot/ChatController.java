@@ -182,8 +182,8 @@ public class ChatController {
                             .token(message.token)
                             .channel(channel.getId())
                             .text("Here's what I have\n" +
-                                    "Try using the slash command for example */onboard* with the section name\n " +
-                                    "_/onboard <section name>_").mrkdwn(true)
+                                    "Join a channel and if there is an onboarding process for that channel\n" +
+                                    "I'll notice that you've joined and display the information for you").mrkdwn(true)
                             .asUser(false)
                             .username("@onboard")
                             .build());
@@ -198,7 +198,7 @@ public class ChatController {
                             .text("Hey <@" + message.event.user + ">, I feel your pain so here is how we can interact\n" +
                                     "you can say _@onboard hello_ or _hi_\n" +
                                     "you can ask how to onboard try _how do I onboard to <team>_\n" +
-                                    "I'm sure my makers have plans to add much more")
+                                    "I'm sure my makers have plans to add much more interactions")
                             .mrkdwn(true)
                             .asUser(false)
                             .username("@onboard")
