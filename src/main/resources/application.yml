@@ -1,0 +1,6 @@
+server:
+  port: 8090
+
+slack:
+  auth:
+    token: "${SLACK_TOKEN}"
