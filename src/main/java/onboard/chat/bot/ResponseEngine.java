@@ -1,0 +1,163 @@
+package onboard.chat.bot;
+
+import com.github.seratch.jslack.Slack;
+import com.github.seratch.jslack.api.methods.SlackApiException;
+import com.github.seratch.jslack.api.methods.request.chat.ChatPostMessageRequest;
+import com.github.seratch.jslack.api.methods.response.chat.ChatPostMessageResponse;
+import com.github.seratch.jslack.api.model.Channel;
+import lombok.extern.slf4j.Slf4j;
+import lombok.val;
+
+import java.io.IOException;
+
+@Slf4j
+public  class ResponseEngine {
+
+    public static void handleReply(Slack slack, IncomingMessage message, Channel channel) throws IOException, SlackApiException, InterruptedException {
+        log.info("Handling reply to incoming message");
+        val incomingText = message.event.text.toLowerCase();
+        if (message.event.type.equals("app_mention")) {
+            if (incomingText.contains("hi") || incomingText.contains("hello")) {
+                log.info("Message is a greeting, starting the conversation");
+                replyToGreeting(slack, message, channel);
+            }
+        }
+
+        if (message.event.type.equals("message") && message.event.subtype == null) {
+            if (incomingText.contains("how do i") || incomingText.contains("timesheet")) {
+                replyToQuestion(slack, message, channel, ChatResponses.TIMESHEET_RESPONSE);
+            } else if (incomingText.contains("how do i")) {
+                replyToQuestion(slack, message, channel, ChatResponses.HOW_DO_I_QUESTION_RESPONSE);
+            }
+            if (incomingText.contains("help")) {
+                replyToHelp(slack, message, channel, ChatResponses.HELP_RESPONSE);
+            }
+            if(incomingText.contains("thanks") || incomingText.contains("thank you")) {
+                sendThankYouResponse(slack, message, channel);
+            }
+            if(incomingText.contains("who")) {
+                replyToPersonQuestion(slack, message, channel);
+            }
+            if(incomingText.contains("what") || incomingText.contains("why")) {
+                sendDefaultResponse(slack, message, channel);
+            }
+            if(incomingText.contains("where") && incomingText.contains("cv") && incomingText.contains("templates")) {
+                sendCVResponse(slack, message, channel, ChatResponses.CV_RESPONSE);
+            }
+        }
+    }
+
+    private static void replyToPersonQuestion(Slack slack, IncomingMessage message, Channel channel) throws IOException, SlackApiException {
+        log.info("Incoming message cannot answer response passing back to buddy, message contents {}", message.event.text);
+        slack.methods().chatPostMessage(
+                ChatPostMessageRequest.builder()
+                        .token(message.token)
+                        .channel(channel.getId())
+                        .text(ChatResponses.UNABLE_TO_ANSWER)
+                        .asUser(false)
+                        .username("@onboard")
+                        .build());
+    }
+
+    private static void sendThankYouResponse(Slack slack, IncomingMessage message, Channel channel) throws IOException, SlackApiException {
+        log.info("Sending thank you response");
+        slack.methods().chatPostMessage(
+                ChatPostMessageRequest.builder()
+                        .token(message.token)
+                        .channel(channel.getId())
+                        .text(ChatResponses.THANK_YOU_RESPONSE)
+                        .mrkdwn(true)
+                        .asUser(false)
+                        .username("@onboard")
+                        .build());
+    }
+
+    private static void sendDefaultResponse(Slack slack, IncomingMessage message, Channel channel) throws IOException, SlackApiException {
+        log.info("Sending default message, response to incoming message {}", message.event.text);
+        slack.methods().chatPostMessage(
+                ChatPostMessageRequest.builder()
+                        .token(message.token)
+                        .channel(channel.getId())
+                        .text(ChatResponses.DEFAULT_RESPONSE)
+                        .mrkdwn(true)
+                        .asUser(false)
+                        .username("@onboard")
+                        .build());
+    }
+
+    private static void replyToGreeting(Slack slack, IncomingMessage message, Channel channel) throws IOException, SlackApiException {
+        slack.methods().chatPostMessage(
+                ChatPostMessageRequest.builder()
+                        .token(message.token)
+                        .channel(channel.getId())
+                        .text("Hey <@" + message.event.user + "> what can I do for you?").mrkdwn(true)
+                        .asUser(false)
+                        .username("@onboard")
+                        .build());
+    }
+
+    private static void replyToQuestion(Slack slack, IncomingMessage message, Channel channel, String text) throws IOException, SlackApiException, InterruptedException {
+        log.info("Reply to greeting, contents of the incoming message are {}", message.event.text);
+        ChatPostMessageResponse postResponse = slack.methods().chatPostMessage(
+                ChatPostMessageRequest.builder()
+                        .token(message.token)
+                        .channel(channel.getId())
+                        .text("_Let's see what I can find_...").mrkdwn(true)
+                        .asUser(false)
+                        .username("@onboard")
+                        .build());
+        assert postResponse.isOk();
+
+        Thread.sleep(1000);
+
+        slack.methods().chatPostMessage(
+                ChatPostMessageRequest.builder()
+                        .token(message.token)
+                        .channel(channel.getId())
+                        .text(text).mrkdwn(true)
+                        .asUser(false)
+                        .username("@onboard")
+                        .build());
+    }
+
+    private static void replyToHelp(Slack slack, IncomingMessage message, Channel channel, String text) throws IOException, SlackApiException {
+        log.info("Reply to request for help");
+        slack.methods().chatPostMessage(
+                ChatPostMessageRequest.builder()
+                        .token(message.token)
+                        .channel(channel.getId())
+                        .text("Hey <@" + message.event.user + ">, I feel your pain so here is how we can interact\n" +
+                                text)
+                        .mrkdwn(true)
+                        .asUser(false)
+                        .username("@onboard")
+                        .build());
+    }
+
+    private static void sendCVResponse(Slack slack, IncomingMessage message, Channel channel, String text) throws IOException, SlackApiException, InterruptedException {
+        log.info("Reply to CV templates, contents of the incoming message are {}", message.event.text);
+        ChatPostMessageResponse postResponse = slack.methods().chatPostMessage(
+                ChatPostMessageRequest.builder()
+                        .token(message.token)
+                        .channel(channel.getId())
+                        .text("Well for most things the CGI portal is your first port of call\n" +
+                                "This is no different, getting the information for you now").mrkdwn(true)
+                        .asUser(false)
+                        .username("@onboard")
+                        .build());
+        assert postResponse.isOk();
+
+        Thread.sleep(1000);
+
+        log.info("Sending default message, response to incoming message {}", message.event.text);
+        slack.methods().chatPostMessage(
+                ChatPostMessageRequest.builder()
+                        .token(message.token)
+                        .channel(channel.getId())
+                        .text(text)
+                        .mrkdwn(true)
+                        .asUser(false)
+                        .username("@onboard")
+                        .build());
+    }
+}
