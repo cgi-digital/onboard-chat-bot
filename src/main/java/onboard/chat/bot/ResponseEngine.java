@@ -40,7 +40,13 @@ public  class ResponseEngine {
             if(incomingText.contains("who")) {
                 sendReply(slack, message, channel, ChatResponses.UNABLE_TO_ANSWER);
             }
-            if(incomingText.contains("what") || incomingText.contains("why")) {
+            if(incomingText.contains("what")) {
+                sendReply(slack, message, channel, ChatResponses.DEFAULT_RESPONSE);
+            }
+            if(incomingText.contains("why")) {
+                sendReply(slack, message, channel, ChatResponses.DEFAULT_RESPONSE);
+            }
+            if(incomingText.contains("when")) {
                 sendReply(slack, message, channel, ChatResponses.DEFAULT_RESPONSE);
             }
             if(incomingText.contains("where") && incomingText.contains("cv") && incomingText.contains("templates")) {
