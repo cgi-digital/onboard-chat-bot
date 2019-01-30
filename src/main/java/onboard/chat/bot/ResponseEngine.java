@@ -26,7 +26,7 @@ public  class ResponseEngine {
         }
 
         if (message.event.type.equals("message") && message.event.subtype == null) {
-            if (incomingText.contains("how do i") || incomingText.contains("timesheet")) {
+            if (incomingText.contains("how do i") && incomingText.contains("timesheet")) {
                 replyToQuestion(slack, message, channel, ChatResponses.TIMESHEET_RESPONSE);
             } else if (incomingText.contains("how do i")) {
                 replyToQuestion(slack, message, channel, ChatResponses.HOW_DO_I_QUESTION_RESPONSE);
@@ -35,13 +35,13 @@ public  class ResponseEngine {
                 replyToHelp(slack, message, channel, ChatResponses.HELP_RESPONSE);
             }
             if(incomingText.contains("thanks") || incomingText.contains("thank you")) {
-                sendThankYouResponse(slack, message, channel);
+                sendReply(slack, message, channel, ChatResponses.THANK_YOU_RESPONSE);
             }
             if(incomingText.contains("who")) {
-                replyToPersonQuestion(slack, message, channel);
+                sendReply(slack, message, channel, ChatResponses.UNABLE_TO_ANSWER);
             }
             if(incomingText.contains("what") || incomingText.contains("why")) {
-                sendDefaultResponse(slack, message, channel);
+                sendReply(slack, message, channel, ChatResponses.DEFAULT_RESPONSE);
             }
             if(incomingText.contains("where") && incomingText.contains("cv") && incomingText.contains("templates")) {
                 sendCVResponse(slack, message, channel, ChatResponses.CV_RESPONSE);
@@ -49,39 +49,27 @@ public  class ResponseEngine {
         }
     }
 
-    private static void replyToPersonQuestion(Slack slack, IncomingMessage message, Channel channel) throws IOException, SlackApiException {
-        log.info("Incoming message cannot answer response passing back to buddy, message contents {}", message.event.text);
+    private static void replyToHelp(Slack slack, IncomingMessage message, Channel channel, String text) throws IOException, SlackApiException {
+        log.info("Reply to request for help");
         slack.methods().chatPostMessage(
                 ChatPostMessageRequest.builder()
                         .token(message.token)
                         .channel(channel.getId())
-                        .text(ChatResponses.UNABLE_TO_ANSWER)
-                        .asUser(false)
-                        .username(ONBOARD)
-                        .build());
-    }
-
-    private static void sendThankYouResponse(Slack slack, IncomingMessage message, Channel channel) throws IOException, SlackApiException {
-        log.info("Sending thank you response");
-        slack.methods().chatPostMessage(
-                ChatPostMessageRequest.builder()
-                        .token(message.token)
-                        .channel(channel.getId())
-                        .text(ChatResponses.THANK_YOU_RESPONSE)
+                        .text("Hey <@" + message.event.user + ">, I feel your pain so here is how we can interact\n" +
+                                text)
                         .mrkdwn(true)
                         .asUser(false)
                         .username(ONBOARD)
                         .build());
     }
 
-    private static void sendDefaultResponse(Slack slack, IncomingMessage message, Channel channel) throws IOException, SlackApiException {
-        log.info("Sending default message, response to incoming message {}", message.event.text);
+    private static void sendReply(Slack slack, IncomingMessage message, Channel channel, String text) throws IOException, SlackApiException {
+        log.info("Incoming message with message contents {}", message.event.text);
         slack.methods().chatPostMessage(
                 ChatPostMessageRequest.builder()
                         .token(message.token)
                         .channel(channel.getId())
-                        .text(ChatResponses.DEFAULT_RESPONSE)
-                        .mrkdwn(true)
+                        .text(text)
                         .asUser(false)
                         .username(ONBOARD)
                         .build());
@@ -117,20 +105,6 @@ public  class ResponseEngine {
                         .token(message.token)
                         .channel(channel.getId())
                         .text(text).mrkdwn(true)
-                        .asUser(false)
-                        .username(ONBOARD)
-                        .build());
-    }
-
-    private static void replyToHelp(Slack slack, IncomingMessage message, Channel channel, String text) throws IOException, SlackApiException {
-        log.info("Reply to request for help");
-        slack.methods().chatPostMessage(
-                ChatPostMessageRequest.builder()
-                        .token(message.token)
-                        .channel(channel.getId())
-                        .text("Hey <@" + message.event.user + ">, I feel your pain so here is how we can interact\n" +
-                                text)
-                        .mrkdwn(true)
                         .asUser(false)
                         .username(ONBOARD)
                         .build());
