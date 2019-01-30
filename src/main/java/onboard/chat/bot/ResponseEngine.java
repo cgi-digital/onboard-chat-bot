@@ -13,6 +13,8 @@ import java.io.IOException;
 @Slf4j
 public  class ResponseEngine {
 
+    public static final String ONBOARD = "@onboard";
+
     public static void handleReply(Slack slack, IncomingMessage message, Channel channel) throws IOException, SlackApiException, InterruptedException {
         log.info("Handling reply to incoming message");
         val incomingText = message.event.text.toLowerCase();
@@ -55,7 +57,7 @@ public  class ResponseEngine {
                         .channel(channel.getId())
                         .text(ChatResponses.UNABLE_TO_ANSWER)
                         .asUser(false)
-                        .username("@onboard")
+                        .username(ONBOARD)
                         .build());
     }
 
@@ -68,7 +70,7 @@ public  class ResponseEngine {
                         .text(ChatResponses.THANK_YOU_RESPONSE)
                         .mrkdwn(true)
                         .asUser(false)
-                        .username("@onboard")
+                        .username(ONBOARD)
                         .build());
     }
 
@@ -81,7 +83,7 @@ public  class ResponseEngine {
                         .text(ChatResponses.DEFAULT_RESPONSE)
                         .mrkdwn(true)
                         .asUser(false)
-                        .username("@onboard")
+                        .username(ONBOARD)
                         .build());
     }
 
@@ -92,7 +94,7 @@ public  class ResponseEngine {
                         .channel(channel.getId())
                         .text("Hey <@" + message.event.user + "> what can I do for you?").mrkdwn(true)
                         .asUser(false)
-                        .username("@onboard")
+                        .username(ONBOARD)
                         .build());
     }
 
@@ -104,7 +106,7 @@ public  class ResponseEngine {
                         .channel(channel.getId())
                         .text("_Let's see what I can find_...").mrkdwn(true)
                         .asUser(false)
-                        .username("@onboard")
+                        .username(ONBOARD)
                         .build());
         assert postResponse.isOk();
 
@@ -116,7 +118,7 @@ public  class ResponseEngine {
                         .channel(channel.getId())
                         .text(text).mrkdwn(true)
                         .asUser(false)
-                        .username("@onboard")
+                        .username(ONBOARD)
                         .build());
     }
 
@@ -130,7 +132,7 @@ public  class ResponseEngine {
                                 text)
                         .mrkdwn(true)
                         .asUser(false)
-                        .username("@onboard")
+                        .username(ONBOARD)
                         .build());
     }
 
@@ -143,13 +145,13 @@ public  class ResponseEngine {
                         .text("Well for most things the CGI portal is your first port of call\n" +
                                 "This is no different, getting the information for you now").mrkdwn(true)
                         .asUser(false)
-                        .username("@onboard")
+                        .username(ONBOARD)
                         .build());
         assert postResponse.isOk();
 
         Thread.sleep(1000);
 
-        log.info("Sending default message, response to incoming message {}", message.event.text);
+        log.info("Sending message, response to incoming message {}", message.event.text);
         slack.methods().chatPostMessage(
                 ChatPostMessageRequest.builder()
                         .token(message.token)
@@ -157,7 +159,7 @@ public  class ResponseEngine {
                         .text(text)
                         .mrkdwn(true)
                         .asUser(false)
-                        .username("@onboard")
+                        .username(ONBOARD)
                         .build());
     }
 }

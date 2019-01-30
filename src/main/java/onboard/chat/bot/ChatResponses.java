@@ -12,7 +12,7 @@ public interface ChatResponses {
             "sign in with your usual sign in details and you'll be redirected to the page\n" +
             "Just remember to get your timesheet submitted by midday *Friday* or directors burst into tears! :grinning:";
 
-    String HELP_RESPONSE = "you can say _@onboard hello_ or _hi_\n" +
+    String HELP_RESPONSE = "you can say _@onboard hello_ or _hi_ to start a conversation\n" +
             "you can ask how to onboard try _how do I onboard to <team>_\n" +
             "you can ask where to find important onboarding cv documents\n" +
             "You can ask about completing timesheets\n" +
