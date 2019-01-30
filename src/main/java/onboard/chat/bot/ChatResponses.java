@@ -31,4 +31,9 @@ public interface ChatResponses {
 
     String UNABLE_TO_ANSWER = "I can't answer that question, I'm really sorry :anguished:\n" +
             "try asking your buddy first then your manager";
+
+    String COURCES_RESPONSE = "For accessing courses and providers like skillsport\n" +
+            "Again open your web browser and navigate to the CGI portal\n" +
+            "Click the Tools tab then click the Learning tools link\n" +
+            "This will redirect you to the learning landing page";
 }

@@ -44,7 +44,11 @@ public  class ResponseEngine {
                 sendReply(slack, message, channel, ChatResponses.DEFAULT_RESPONSE);
             }
             if(incomingText.contains("where") && incomingText.contains("cv") && incomingText.contains("templates")) {
-                sendCVResponse(slack, message, channel, ChatResponses.CV_RESPONSE);
+                sendStandardThinkingResponse(slack, message, channel, ChatResponses.CV_RESPONSE);
+            } else if(incomingText.contains("where") && incomingText.contains("course")) {
+                sendStandardThinkingResponse(slack, message, channel, ChatResponses.COURCES_RESPONSE);
+            } else if(incomingText.contains("where")) {
+                sendReply(slack, message, channel, ChatResponses.UNABLE_TO_ANSWER);
             }
         }
     }
@@ -110,7 +114,7 @@ public  class ResponseEngine {
                         .build());
     }
 
-    private static void sendCVResponse(Slack slack, IncomingMessage message, Channel channel, String text) throws IOException, SlackApiException, InterruptedException {
+    private static void sendStandardThinkingResponse(Slack slack, IncomingMessage message, Channel channel, String text) throws IOException, SlackApiException, InterruptedException {
         log.info("Reply to CV templates, contents of the incoming message are {}", message.event.text);
         ChatPostMessageResponse postResponse = slack.methods().chatPostMessage(
                 ChatPostMessageRequest.builder()
