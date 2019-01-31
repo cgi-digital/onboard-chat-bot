@@ -33,7 +33,7 @@ public class QuestionType {
             if (tokens.contains("timesheet") || tokens.contains("timesheets")) {
                 ResponseHandler.replyToQuestion(slack, message, channel, ChatResponses.TIMESHEET_RESPONSE);
             }
-            if (tokens.contains("course")) {
+            if (tokens.contains("course") || tokens.contains("courses")) {
                 ResponseHandler.sendStandardThinkingResponse(slack, message, channel, ChatResponses.COURSES_RESPONSE);
             }
             if(tokens.contains("cgi") && tokens.contains("profile")) {
