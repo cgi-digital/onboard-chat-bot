@@ -35,7 +35,7 @@ public class ResponseHandler {
                 ChatPostMessageRequest.builder()
                         .token(message.token)
                         .channel(channel.getId())
-                        .text(text)
+                        .text("<@" + message.event.user + ">, " + text)
                         .asUser(false)
                         .username(ONBOARD)
                         .build());
@@ -58,7 +58,7 @@ public class ResponseHandler {
                 ChatPostMessageRequest.builder()
                         .token(message.token)
                         .channel(channel.getId())
-                        .text("_Let's see what I can find_...").mrkdwn(true)
+                        .text("OK <@" + message.event.user + ">, _Let's see what I can find_...").mrkdwn(true)
                         .asUser(false)
                         .username(ONBOARD)
                         .build());
@@ -82,7 +82,7 @@ public class ResponseHandler {
                 ChatPostMessageRequest.builder()
                         .token(message.token)
                         .channel(channel.getId())
-                        .text("Well for most things the CGI portal is your first port of call\n" +
+                        .text("<@" + message.event.user + ">, Well for most things the CGI portal is your first port of call\n" +
                                 "This is no different, getting the information for you now").mrkdwn(true)
                         .asUser(false)
                         .username(ONBOARD)

@@ -32,8 +32,8 @@ public class ResponseEngine {
                 slack.methods().conversationsClose(
                         ConversationsCloseRequest.builder().token(message.token).channel(channel.getId()).build());
             }
-            if (incomingText.contains("help")) {
-                ResponseHandler.replyToHelp(slack, message, channel, ChatResponses.HUMAN_RESPONSE);
+            if (incomingText.contains("human")) {
+                ResponseHandler.sendReply(slack, message, channel, ChatResponses.HUMAN_RESPONSE);
             } else {
                 val questionType = new QuestionType();
                 questionType.filterAndRespond(slack, message, channel, incomingText);
