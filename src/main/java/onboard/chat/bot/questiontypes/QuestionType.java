@@ -30,7 +30,7 @@ public class QuestionType {
                     ResponseHandler.replyToQuestion(slack, message, channel, ChatResponses.SEARCH_RESPONSE);
                 }
             }
-            if (tokens.contains("timesheet")) {
+            if (tokens.contains("timesheet") || tokens.contains("timesheets")) {
                 ResponseHandler.replyToQuestion(slack, message, channel, ChatResponses.TIMESHEET_RESPONSE);
             }
             if (tokens.contains("course")) {
