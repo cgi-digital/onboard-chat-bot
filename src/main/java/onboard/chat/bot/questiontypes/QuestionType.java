@@ -69,9 +69,6 @@ public class QuestionType {
             if(tokens.contains("onboard") || tokens.contains("onboarding")) {
                 ResponseHandler.replyToQuestion(slack, message, channel, ChatResponses.HOW_DO_I_QUESTION_RESPONSE);
             }
-            if(tokens.contains("timesheet")) {
-                ResponseHandler.replyToQuestion(slack, message, channel, ChatResponses.TIMESHEET_RESPONSE);
-            }
             if(tokens.contains("book")) {
                 if(tokens.contains("room")) {
                     ResponseHandler.sendStandardThinkingResponse(slack, message, channel, ChatResponses.MEETING_ROOM_BOOKING);
