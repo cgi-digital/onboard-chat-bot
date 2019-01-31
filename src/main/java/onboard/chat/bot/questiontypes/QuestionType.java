@@ -48,7 +48,7 @@ public class QuestionType {
                 ResponseHandler.replyToQuestion(slack, message, channel, ChatResponses.EXPENSES_RESPONSE);
             }
             if(tokens.contains("it")) {
-                if(tokens.contains("issue") || tokens.contains("service desk")) {
+                if(tokens.contains("issue") || tokens.contains("issues") ||tokens.contains("service desk")) {
                     ResponseHandler.sendStandardThinkingResponse(slack, message, channel, ChatResponses.IT_DESK_RESPONSE);
                 } else {
                     ResponseHandler.replyToQuestion(slack, message, channel, ChatResponses.DEFAULT_RESPONSE);
@@ -76,9 +76,12 @@ public class QuestionType {
                 if(tokens.contains("room")) {
                     ResponseHandler.sendStandardThinkingResponse(slack, message, channel, ChatResponses.MEETING_ROOM_BOOKING);
                 }
-                if(tokens.contains("t&s") || tokens.contains("travel")){
+                if(tokens.contains("travel")){
                     ResponseHandler.sendStandardThinkingResponse(slack, message, channel, ChatResponses.TRAVEL_RESPONSE);
                 }
+            }
+            if(tokens.contains("emergency") || tokens.contains("fire") || tokens.contains("aid") || tokens.contains("aider")) {
+                ResponseHandler.replyToQuestion(slack, message, channel, ChatResponses.UNABLE_TO_ANSWER);
             }
 
         } catch (Exception ex) {

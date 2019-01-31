@@ -11,7 +11,7 @@ import onboard.chat.bot.questiontypes.QuestionType;
 import java.io.IOException;
 
 @Slf4j
-public  class ResponseEngine {
+public class ResponseEngine {
 
     public static void handleReply(Slack slack, IncomingMessage message, Channel channel) throws IOException, SlackApiException, InterruptedException {
         log.info("Handling reply to incoming message");
@@ -31,6 +31,9 @@ public  class ResponseEngine {
                 ResponseHandler.sendReply(slack, message, channel, ChatResponses.THANK_YOU_RESPONSE);
                 slack.methods().conversationsClose(
                         ConversationsCloseRequest.builder().token(message.token).channel(channel.getId()).build());
+            }
+            if (incomingText.contains("help")) {
+                ResponseHandler.replyToHelp(slack, message, channel, ChatResponses.HUMAN_RESPONSE);
             } else {
                 val questionType = new QuestionType();
                 questionType.filterAndRespond(slack, message, channel, incomingText);

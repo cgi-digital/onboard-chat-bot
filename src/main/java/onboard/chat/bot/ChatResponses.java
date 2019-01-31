@@ -16,6 +16,7 @@ public interface ChatResponses {
             "you can ask how to onboard try _how do I onboard to <team>_\n" +
             "you can ask where to find important onboarding cv documents\n" +
             "You can ask about completing timesheets\n" +
+            "Try how do I book travel\n" +
             "Just please use the usual question marker such as where, when, how etc";
 
     String CV_RESPONSE = "First go to the CGI portal\n" +
@@ -81,4 +82,7 @@ public interface ChatResponses {
     String SEARCH_RESPONSE = "That's a very broad subject\n" +
             "For that information I'd recommend you access the CGI portal\n" +
             "And use the search feature in the top right hand section of the page.";
+
+    String HUMAN_RESPONSE = "I can neither confirm nor deny the presence of a thing called a soul\n" +
+            "Aren't we all the stuff that dreams are made of";
 }
