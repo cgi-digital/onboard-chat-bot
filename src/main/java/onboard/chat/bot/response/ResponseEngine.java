@@ -1,4 +1,4 @@
-package onboard.chat.bot;
+package onboard.chat.bot.response;
 
 import com.github.seratch.jslack.Slack;
 import com.github.seratch.jslack.api.methods.SlackApiException;
@@ -6,6 +6,8 @@ import com.github.seratch.jslack.api.methods.request.conversations.Conversations
 import com.github.seratch.jslack.api.model.Channel;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import onboard.chat.bot.ChatResponses;
+import onboard.chat.bot.IncomingMessage;
 import onboard.chat.bot.questiontypes.QuestionType;
 
 import java.io.IOException;
@@ -29,6 +31,7 @@ public class ResponseEngine {
             }
             if (incomingText.contains("thank")) {
                 ResponseHandler.sendReply(slack, message, channel, ChatResponses.THANK_YOU_RESPONSE);
+                log.info("Closing the conversation, thanks keyword sent");
                 slack.methods().conversationsClose(
                         ConversationsCloseRequest.builder().token(message.token).channel(channel.getId()).build());
             }

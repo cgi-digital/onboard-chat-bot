@@ -3,86 +3,53 @@ package onboard.chat.bot.questiontypes;
 import com.github.seratch.jslack.Slack;
 import com.github.seratch.jslack.api.model.Channel;
 import lombok.extern.slf4j.Slf4j;
-import onboard.chat.bot.ChatResponses;
+import lombok.val;
 import onboard.chat.bot.IncomingMessage;
-import onboard.chat.bot.ResponseHandler;
+import onboard.chat.bot.response.ResponseHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 
-import java.util.List;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
+import java.io.File;
+import java.io.IOException;
 
 import static java.util.Arrays.asList;
 
 @Slf4j
 public class QuestionType {
 
-    private List<String> tokenizeInputString(String text) {
-        return asList(text.split(" "));
-    }
 
-    public void filterAndRespond(Slack slack, IncomingMessage message, Channel channel, String incomingText) {
-        List<String> tokens = this.tokenizeInputString(incomingText);
+    @Autowired
+    private ResourceLoader resourceLoader;
 
+    public void filterAndRespond(Slack slack, IncomingMessage message, Channel channel, String incomingText) throws IOException {
+        val resource = new File("./resources/resources.xml").getAbsoluteFile();
+
+        ClassLoader classLoader = getClass().getClassLoader();
+        val resourcesHandler =
+                (resource != null)
+                        ? resource : new File(classLoader.getResource("resources.xml").getFile());
         try {
 
-            if (tokens.contains("cv")) {
-                if (tokens.contains("templates")) {
-                    ResponseHandler.sendStandardThinkingResponse(slack, message, channel, ChatResponses.CV_RESPONSE);
-                } else {
-                    ResponseHandler.replyToQuestion(slack, message, channel, ChatResponses.SEARCH_RESPONSE);
+            val jaxbContext = JAXBContext.newInstance(Resources.class);
+            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+            val resources = (Resources) unmarshaller.unmarshal(resourcesHandler);
+            val templates = asList(resources.getTemplate());
+            for(Template t: templates) {
+                val textList = asList(t.getQuestion().getText());
+                for(String s: textList) {
+                    if(incomingText.toLowerCase().contains(s)) {
+                        log.info("The response to print is {}", t.getResponse());
+                        ResponseHandler.sendReply(slack, message, channel, t.getResponse());
+                        break;
+                    }
                 }
-            }
-            if (tokens.contains("timesheet") || tokens.contains("timesheets")) {
-                ResponseHandler.replyToQuestion(slack, message, channel, ChatResponses.TIMESHEET_RESPONSE);
-            }
-            if (tokens.contains("course") || tokens.contains("courses")) {
-                ResponseHandler.sendStandardThinkingResponse(slack, message, channel, ChatResponses.COURSES_RESPONSE);
-            }
-            if(tokens.contains("cgi") && tokens.contains("profile")) {
-                ResponseHandler.sendStandardThinkingResponse(slack, message, channel, ChatResponses.CGI_PROFILE_RESPONSE);
-            }
-            if(tokens.contains("hr")) {
-                if(tokens.contains("portal") || tokens.contains("information") || tokens.contains("service")) {
-                    ResponseHandler.sendStandardThinkingResponse(slack, message, channel, ChatResponses.HR_PORTAL_RESPONSE);
-                }
-            }
-            if(tokens.contains("expenses")) {
-                ResponseHandler.replyToQuestion(slack, message, channel, ChatResponses.EXPENSES_RESPONSE);
-            }
-            if(tokens.contains("it")) {
-                if(tokens.contains("issue") || tokens.contains("issues") ||tokens.contains("service desk")) {
-                    ResponseHandler.sendStandardThinkingResponse(slack, message, channel, ChatResponses.IT_DESK_RESPONSE);
-                } else {
-                    ResponseHandler.replyToQuestion(slack, message, channel, ChatResponses.DEFAULT_RESPONSE);
-                }
-            }
-            if(tokens.contains("pay")) {
-                ResponseHandler.replyToQuestion(slack, message, channel, ChatResponses.GLOBAL_PAY_RESPONSE);
-            }
-            if(tokens.contains("benefits")) {
-                ResponseHandler.replyToQuestion(slack, message, channel, ChatResponses.BENEFITS_RESPONSE);
-            }
-            if(tokens.contains("applications")) {
-                ResponseHandler.replyToQuestion(slack, message, channel, ChatResponses.APPLICATIIONS_HUB_RESPONSE);
-            }
-            if(tokens.contains("jira")) {
-                ResponseHandler.replyToQuestion(slack, message, channel, ChatResponses.UNABLE_TO_ANSWER);
-            }
-            if(tokens.contains("onboard") || tokens.contains("onboarding")) {
-                ResponseHandler.replyToQuestion(slack, message, channel, ChatResponses.HOW_DO_I_QUESTION_RESPONSE);
-            }
-            if(tokens.contains("book")) {
-                if(tokens.contains("room")) {
-                    ResponseHandler.sendStandardThinkingResponse(slack, message, channel, ChatResponses.MEETING_ROOM_BOOKING);
-                }
-                if(tokens.contains("travel")){
-                    ResponseHandler.sendStandardThinkingResponse(slack, message, channel, ChatResponses.TRAVEL_RESPONSE);
-                }
-            }
-            if(tokens.contains("emergency") || tokens.contains("fire") || tokens.contains("aid") || tokens.contains("aider")) {
-                ResponseHandler.replyToQuestion(slack, message, channel, ChatResponses.UNABLE_TO_ANSWER);
             }
 
         } catch (Exception ex) {
-            log.info("An exception handling a where question type {}", ex.getMessage());
+            log.info("Exception: {}", ex.getMessage());
         }
+
     }
 }
