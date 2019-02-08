@@ -111,4 +111,13 @@
         <response>This is different depending on where you are located The best advice I can give you here is to use the CGI portal, in the top right You'll find the search box try searching there for your location followed by room booking
         </response>
     </template>
+    <template>
+        <question>
+            <text>sickness</text>
+            <text>illness</text>
+            <text>sick</text>
+        </question>
+        <response>You should contact your manager at least half an hour before you start work. If you are working on a project then you also need to contact the project manager to let them know as well. There is a document outlining the correct procedures which can be found on the CGI portal, use the search box and search for "sick".
+        </response>
+    </template>
 </resources>
