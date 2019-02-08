@@ -5,7 +5,9 @@ import com.github.seratch.jslack.api.methods.SlackApiException;
 import com.github.seratch.jslack.api.model.Channel;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
-import onboard.chat.bot.IncomingMessage;
+import onboard.chat.bot.model.IncomingMessage;
+import onboard.chat.bot.model.Resources;
+import onboard.chat.bot.model.Template;
 import onboard.chat.bot.response.ResponseHandler;
 
 import javax.xml.bind.JAXBContext;

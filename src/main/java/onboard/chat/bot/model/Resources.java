@@ -1,4 +1,4 @@
-package onboard.chat.bot.questiontypes;
+package onboard.chat.bot.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

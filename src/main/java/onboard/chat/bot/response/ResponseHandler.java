@@ -5,7 +5,7 @@ import com.github.seratch.jslack.api.methods.SlackApiException;
 import com.github.seratch.jslack.api.methods.request.chat.ChatPostEphemeralRequest;
 import com.github.seratch.jslack.api.model.Channel;
 import lombok.extern.slf4j.Slf4j;
-import onboard.chat.bot.IncomingMessage;
+import onboard.chat.bot.model.IncomingMessage;
 
 import java.io.IOException;
 
