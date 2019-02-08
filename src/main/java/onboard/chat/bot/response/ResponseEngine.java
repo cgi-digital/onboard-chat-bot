@@ -3,6 +3,7 @@ package onboard.chat.bot.response;
 import com.github.seratch.jslack.Slack;
 import com.github.seratch.jslack.api.methods.SlackApiException;
 import com.github.seratch.jslack.api.methods.request.conversations.ConversationsCloseRequest;
+import com.github.seratch.jslack.api.methods.response.chat.ChatPostEphemeralResponse;
 import com.github.seratch.jslack.api.model.Channel;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -15,7 +16,7 @@ import java.io.IOException;
 @Slf4j
 public class ResponseEngine {
 
-    public static void handleReply(Slack slack, IncomingMessage message, Channel channel) throws IOException, SlackApiException, InterruptedException {
+    public static void handleReply(Slack slack, IncomingMessage message, Channel channel) throws IOException, SlackApiException {
         log.info("Handling reply to incoming message");
         val incomingText = message.event.text.toLowerCase();
         if (message.event.type.equals("app_mention")) {
@@ -28,18 +29,21 @@ public class ResponseEngine {
         if (message.event.type.equals("message") && message.event.subtype == null) {
             if (incomingText.contains("help")) {
                 ResponseHandler.replyToHelp(slack, message, channel, ChatResponses.HELP_RESPONSE);
-            }
+            } else
             if (incomingText.contains("thank")) {
                 ResponseHandler.sendReply(slack, message, channel, ChatResponses.THANK_YOU_RESPONSE);
                 log.info("Closing the conversation, thanks keyword sent");
                 slack.methods().conversationsClose(
                         ConversationsCloseRequest.builder().token(message.token).channel(channel.getId()).build());
-            }
+            } else
             if (incomingText.contains("human")) {
                 ResponseHandler.sendReply(slack, message, channel, ChatResponses.HUMAN_RESPONSE);
             } else {
                 val questionType = new QuestionType();
-                questionType.filterAndRespond(slack, message, channel, incomingText);
+                ChatPostEphemeralResponse response = questionType.filterAndRespond(slack, message, channel, incomingText);
+                if(!response.isOk()) {
+                    ResponseHandler.sendReply(slack, message, channel, ChatResponses.UNABLE_TO_ANSWER);
+                }
             }
         }
     }

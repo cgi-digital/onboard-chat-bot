@@ -14,4 +14,7 @@ public interface ChatResponses {
 
     String HUMAN_RESPONSE = "I can neither confirm nor deny the presence of a thing called a soul\n" +
             "Aren't we all the stuff that dreams are made of";
+
+    String UNABLE_TO_ANSWER = "I'm so sorry but I don't understand your question,\n" +
+            "perhaps you could try again but phrase it differently :smile:";
 }

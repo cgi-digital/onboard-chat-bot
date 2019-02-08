@@ -2,6 +2,15 @@
 <resources>
     <template>
         <question>
+            <text>hi</text>
+            <text>hello</text>
+            <text>hey</text>
+        </question>
+        <response>Hi how can I help you?
+        </response>
+    </template>
+    <template>
+        <question>
             <text>how do i access my benefits</text>
             <text>my benefits</text>
             <text>benefits</text>

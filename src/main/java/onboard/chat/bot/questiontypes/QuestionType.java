@@ -2,6 +2,7 @@ package onboard.chat.bot.questiontypes;
 
 import com.github.seratch.jslack.Slack;
 import com.github.seratch.jslack.api.methods.SlackApiException;
+import com.github.seratch.jslack.api.methods.response.chat.ChatPostEphemeralResponse;
 import com.github.seratch.jslack.api.model.Channel;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -21,7 +22,7 @@ import static java.util.Arrays.asList;
 @Slf4j
 public class QuestionType {
 
-    public void filterAndRespond(Slack slack, IncomingMessage message, Channel channel, String incomingText) {
+    public ChatPostEphemeralResponse filterAndRespond(Slack slack, IncomingMessage message, Channel channel, String incomingText) {
         val resource = new File("./resources/resources.xml").getAbsoluteFile();
 
         ClassLoader classLoader = getClass().getClassLoader();
@@ -39,8 +40,8 @@ public class QuestionType {
                 for (String s : textList) {
                     if (incomingText.toLowerCase().contains(s)) {
                         log.info("The response to print is {}", t.getResponse());
-                        ResponseHandler.sendReply(slack, message, channel, t.getResponse());
-                        break;
+                        return ResponseHandler.sendReply(slack, message, channel, t.getResponse());
+//                        break;
                     }
                 }
             }
@@ -52,6 +53,6 @@ public class QuestionType {
         } catch (JAXBException ex) {
             log.info("Exception: {}", ex.getMessage());
         }
-
+        return new ChatPostEphemeralResponse();
     }
 }
