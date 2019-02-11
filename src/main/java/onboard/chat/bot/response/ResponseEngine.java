@@ -16,7 +16,7 @@ import java.io.IOException;
 @Slf4j
 public class ResponseEngine {
 
-    public static void handleReply(Slack slack, IncomingMessage message, Channel channel) throws IOException, SlackApiException {
+    public void handleReply(Slack slack, IncomingMessage message, Channel channel) throws IOException, SlackApiException {
         log.info("Handling reply to incoming message");
         val incomingText = message.event.text.toLowerCase();
         if (message.event.type.equals("app_mention")) {

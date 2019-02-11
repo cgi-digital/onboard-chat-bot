@@ -14,7 +14,7 @@ import java.io.IOException;
 @Slf4j
 public class ChatHandler {
 
-    public static void handleIncomingMessage(IncomingMessage message) throws IOException, SlackApiException {
+    public void handleIncomingMessage(IncomingMessage message) throws IOException, SlackApiException {
         val slack = Slack.getInstance();
         val token = ApiToken.of(message.token);
 
@@ -25,7 +25,7 @@ public class ChatHandler {
         log.info("Have channel to send response to, passing to the ResponseEngine to handle the response");
 
         try {
-            ResponseEngine.handleReply(slack, message, channel);
+            new ResponseEngine().handleReply(slack, message, channel);
         } catch (Exception ex) {
             log.info("An exception occurred " + ex.getMessage());
         }

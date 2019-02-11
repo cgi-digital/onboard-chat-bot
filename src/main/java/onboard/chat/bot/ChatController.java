@@ -45,7 +45,7 @@ public class ChatController {
 
         try {
             log.info("Handling incoming message, passed to ChatHandler");
-            ChatHandler.handleIncomingMessage(message);
+            new ChatHandler().handleIncomingMessage(message);
         } catch (Exception ex) {
             log.info("An exception occurred " + ex.getMessage());
         }
