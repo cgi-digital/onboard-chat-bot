@@ -1,4 +1,6 @@
-package onboard.chat.bot.questiontypes;
+package onboard.chat.bot.model;
+
+import onboard.chat.bot.questiontypes.Question;
 
 public class Template {
     private Question question;

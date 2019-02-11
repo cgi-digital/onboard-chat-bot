@@ -1,4 +1,4 @@
-package onboard.chat.bot;
+package onboard.chat.bot.model;
 
 import java.util.List;
 

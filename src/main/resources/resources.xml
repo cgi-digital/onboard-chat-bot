@@ -2,6 +2,15 @@
 <resources>
     <template>
         <question>
+            <text>hi</text>
+            <text>hello</text>
+            <text>hey</text>
+        </question>
+        <response>Hi how can I help you?
+        </response>
+    </template>
+    <template>
+        <question>
             <text>how do i access my benefits</text>
             <text>my benefits</text>
             <text>benefits</text>
@@ -16,7 +25,7 @@
             <text>cv templates</text>
             <text>cv</text>
         </question>
-        <response>First go to the CGI portal Click on Tools and then the templates link Click the Cv's and biography link and download them When that's completed upload to your EPMS profile
+        <response>First go to the CGI portal Click on Tools and then the templates link Click the CV's and biography link and download them When that's completed upload to your EPMS profile
         </response>
     </template>
     <template>
@@ -113,10 +122,32 @@
     </template>
     <template>
         <question>
-            <text>sick leave</text>
-            <text>sick reporting</text>
-            <text>call in sick</text>
+            <text>sickness</text>
+            <text>illness</text>
+            <text>sick</text>
         </question>
-        <response>In this case you should contact your manager at least half an hour before you start work, if you are on project you should also contact the project manager to let them know. You can find more information on the CGI portal, search for "sick" in the search box at the top right of the page.</response>
+        <response>You should contact your manager at least half an hour before you start work. If you are working on a project then you also need to contact the project manager to let them know as well. There is a document outlining the correct procedures which can be found on the CGI portal, use the search box and search for "sick".
+        </response>
+    </template>
+    <template>
+        <question>
+            <text>mobile</text>
+            <text>mobile phone</text>
+            <text>cell phone</text>
+            <text>mobile handset</text>
+        </question>
+        <response>I'd recommend you access the CGI portal And use the search feature in the top right hand section of the page. Search for moblie phone
+        </response>
+    </template>
+    <template>
+        <question>
+            <text>bereavement</text>
+            <text>absence</text>
+            <text>leave</text>
+            <text>holiday</text>
+            <text>time off</text>
+        </question>
+        <response>You can book leave or time off through the HR portal. There are sections there covering illness, bereavement and extended absences. Open your browser on the CGI portal select Tools then select HR service centre.
+        </response>
     </template>
 </resources>

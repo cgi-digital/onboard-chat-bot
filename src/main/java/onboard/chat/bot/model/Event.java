@@ -1,4 +1,4 @@
-package onboard.chat.bot;
+package onboard.chat.bot.model;
 
 public final class Event {
     public String client_msg_id;

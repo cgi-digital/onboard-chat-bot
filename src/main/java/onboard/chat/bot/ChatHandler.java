@@ -6,6 +6,7 @@ import com.github.seratch.jslack.api.methods.request.channels.ChannelsListReques
 import com.github.seratch.jslack.shortcut.model.ApiToken;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import onboard.chat.bot.model.IncomingMessage;
 import onboard.chat.bot.response.ResponseEngine;
 
 import java.io.IOException;
