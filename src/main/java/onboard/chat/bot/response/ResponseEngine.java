@@ -13,9 +13,30 @@ import onboard.chat.bot.questiontypes.QuestionType;
 
 import java.io.IOException;
 
+/**
+ * Class ResponseEngine
+ *
+ * This class handles the reply to the incoming message object it takes the incoming message object and processes the message
+ * for delimiters such as app_mention and message tags. The behaviour is determined from those tags.
+ * and depending on the tag the response is either to reply to help, close the conversation or pass to the next in the
+ * chain to get the required response, if that fails or cannot return a desired response the catch all function UNABLE_TO_ANSWER
+ * is used.
+ */
 @Slf4j
 public class ResponseEngine {
 
+    /**
+     * Function handleReply
+     *
+     * Function takes the slack object, message object and channel object and either replies to the incoming message
+     * or passes the message onto the next object in the chain.
+     *
+     * @param slack The slack object to use
+     * @param message The message object to be processed or responded to
+     * @param channel The channel to send the response to
+     * @throws IOException
+     * @throws SlackApiException
+     */
     public void handleReply(Slack slack, IncomingMessage message, Channel channel) throws IOException, SlackApiException {
         log.info("Handling reply to incoming message");
         val incomingText = message.event.text.toLowerCase();

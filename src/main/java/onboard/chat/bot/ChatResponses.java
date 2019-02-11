@@ -1,5 +1,10 @@
 package onboard.chat.bot;
 
+/**
+ * Interface ChatResponses
+ *
+ * This interface holds some base static responses that are  ot expected to change frequently
+ */
 public interface ChatResponses {
 
     String HELP_RESPONSE = "you can say _@onboard hello_ or _hi_ to start a conversation\n" +

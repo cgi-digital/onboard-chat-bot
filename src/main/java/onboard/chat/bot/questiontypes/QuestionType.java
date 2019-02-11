@@ -18,9 +18,30 @@ import java.io.IOException;
 
 import static java.util.Arrays.asList;
 
+/**
+ * Class QuestionType
+ *
+ * This class handles the different types of question dropping all words from the question but picking up on keywords
+ * if the keyword is present from the XML template there should be an associated response and the response is returned
+ * to the caller.
+ */
 @Slf4j
 public class QuestionType {
 
+    /**
+     * Function filterAndRespond
+     *
+     * This function filters the incoming message object for the text representing the question. The function then reads the
+     * XML resources file and takes the text as either a or one of a list of keywords to check for. If the keyword(s) are in the
+     * list then the function gets the response for that keyword and sends that with the other parameters to the ResponseHandler
+     * class to handle the response to the users request.
+     *
+     * @param slack The slack object
+     * @param message The incoming message object
+     * @param channel The channel to send the response to
+     * @param incomingText The incoming text which contains the keywords to be searched for
+     * @return ChatPostEphemeralResponse the chat response object returned to the caller
+     */
     public ChatPostEphemeralResponse filterAndRespond(Slack slack, IncomingMessage message, Channel channel, String incomingText) {
         val resource = new File("./resources/resources.xml").getAbsoluteFile();
 
