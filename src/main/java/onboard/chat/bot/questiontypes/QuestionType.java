@@ -41,7 +41,6 @@ public class QuestionType {
                     if (incomingText.toLowerCase().contains(s)) {
                         log.info("The response to print is {}", t.getResponse());
                         return ResponseHandler.sendReply(slack, message, channel, t.getResponse());
-//                        break;
                     }
                 }
             }
