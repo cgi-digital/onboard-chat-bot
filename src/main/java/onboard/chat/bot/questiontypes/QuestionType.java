@@ -13,7 +13,6 @@ import onboard.chat.bot.response.ResponseHandler;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.IOException;
 
@@ -32,7 +31,7 @@ public class QuestionType {
         try {
 
             val jaxbContext = JAXBContext.newInstance(Resources.class);
-            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+            val unmarshaller = jaxbContext.createUnmarshaller();
             val resources = (Resources) unmarshaller.unmarshal(resourcesHandler);
             val templates = asList(resources.getTemplate());
             for (Template t : templates) {
