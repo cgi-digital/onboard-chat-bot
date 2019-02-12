@@ -73,29 +73,4 @@ public class ResponseHandler {
         response.setOk(true);
         return response;
     }
-
-    /**
-     * Function replyToGreeting
-     *
-     * This function is used to reply to the user when the issue a greeting request to the system.
-     *
-     * @param slack The slack object to use
-     * @param message The incoming message object to respond to
-     * @param channel The channel to send the response to
-     * @return ChatPostEphemeralResponse The chat object returned to the caller
-     * @throws IOException
-     * @throws SlackApiException
-     */
-    public static ChatPostEphemeralResponse replyToGreeting(Slack slack, IncomingMessage message, Channel channel) throws IOException, SlackApiException {
-        ChatPostEphemeralResponse response = slack.methods().chatPostEphemeral(
-                ChatPostEphemeralRequest.builder()
-                        .token(message.token)
-                        .channel(channel.getId())
-                        .text("Hey <@" + message.event.user + "> what can I do for you?")
-                        .user(message.event.user)
-                        .asUser(false)
-                        .build());
-        response.setOk(true);
-        return response;
-    }
 }

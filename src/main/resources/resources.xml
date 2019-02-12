@@ -6,7 +6,7 @@
             <text>hello</text>
             <text>hey</text>
         </question>
-        <response>Hi how can I help you?
+        <response>what can I do for you?
         </response>
     </template>
     <template>
@@ -148,6 +148,13 @@
             <text>time off</text>
         </question>
         <response>You can book leave or time off through the HR portal. There are sections there covering illness, bereavement and extended absences. Open your browser on the CGI portal select Tools then select HR service centre.
+        </response>
+    </template>
+    <template>
+        <question>
+            <text>onboard</text>
+        </question>
+        <response>In most cases I can answer your questions, if there is a dedicated channel for the team you are onboarding to and I have specific information then I'll notice and send the information directly to you when you join the channel. In other cases you seek help or advice from your buddy as the first point of contact.
         </response>
     </template>
 </resources>
