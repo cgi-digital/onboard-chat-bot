@@ -41,6 +41,7 @@ public class ResponseHandler {
                         .text("Hey <@" + message.event.user + ">, I feel your pain so here is how we can interact\n" +
                                 text)
                         .asUser(false)
+                        .mrkdwn(true)
                         .build());
         response.setOk(true);
         return response;
@@ -66,6 +67,7 @@ public class ResponseHandler {
                         .token(message.token)
                         .channel(channel.getId())
                         .text("<@" + message.event.user + ">, " + text)
+                        .mrkdwn(true)
                         .asUser(false)
                         .build());
         response.setOk(true);

@@ -42,14 +42,14 @@
             <text>skillport</text>
             <text>plurasight</text>
         </question>
-        <response>For accessing courses and providers like skillport Again open your web browser and navigate to the CGI portal Click the Tools tab then click the Learning tools link This will redirect you to the learning landing page
+        <response>For accessing courses and providers like skillport Again open your web browser and navigate to the CGI portal Click the *Tools* tab then click the *Learning tools* link This will redirect you to the learning landing page
         </response>
     </template>
     <template>
         <question>
             <text>cgi profile</text>
         </question>
-        <response>To find your CGI profile just do the following Navigate to the CGI portal page and go through the login steps Under the Banner heading you'll see a few tabs, click the profile tab.
+        <response>To find your CGI profile just do the following Navigate to the *CGI portal* page and go through the login steps Under the Banner heading you'll see a few tabs, click the profile tab.
         </response>
     </template>
     <template>
@@ -58,7 +58,7 @@
             <text>hr case</text>
             <text>hr</text>
         </question>
-        <response>You'll need to go to the HR service desk Navigate to the CGI portal and mouse over the tools link Select the HR service center under the Member support link This will open a new tab where you can deal with HR and payroll and expenses issues
+        <response>You'll need to go to the HR service desk Navigate to the *CGI portal* and mouse over the tools link Select the *HR service center* under the *Member support* link This will open a new tab where you can deal with HR and payroll and expenses issues
         </response>
     </template>
     <template>
@@ -67,7 +67,7 @@
             <text>travel</text>
             <text>hotel</text>
         </question>
-        <response>Navigate to the CGI portal and select Tools Go to Local Tools and then select the CGI Travel Portal link From there you can book travel and see any restrictions that you have to meet before booking
+        <response>Navigate to the CGI portal and select *Tools* Go to *Local Tools* and then select the *CGI Travel Portal* link From there you can book travel and see any restrictions that you have to meet before booking
         </response>
     </template>
     <template>
@@ -77,14 +77,14 @@
             <text>pay statement</text>
             <text>pay</text>
         </question>
-        <response>Use the CGI portal and follow these steps Select Tools Local tools GlobalView Pay This will take you directly to the myView page, you'll find a view mypay button Click that to see your pay breakdown and access your pay statement
+        <response>Use the CGI portal and follow these steps Select *Tools* *Local tools* *GlobalView Pay* This will take you directly to the myView page, you'll find a _view mypay_ button Click that to see your pay breakdown and access your pay statement
         </response>
     </template>
     <template>
         <question>
             <text>applications hub</text>
         </question>
-        <response>Access the applications hub through the CGI portal Select Tools Local Tools and click on Applications Hub
+        <response>Access the applications hub through the *CGI portal* Select *Tools* _Local Tools_ and click on _Applications Hub_
         </response>
     </template>
     <template>
@@ -100,14 +100,14 @@
             <text>it help desk</text>
             <text>it service desk</text>
         </question>
-        <response>You can raise an IT issue through their service desk Navigate to the CGI portal and then select Tools Memeber Support IT Service Portal.
+        <response>You can raise an IT issue through their service desk Navigate to the *CGI portal* and then select *Tools* _Memeber Support IT Service_ Portal.
         </response>
     </template>
     <template>
         <question>
             <text>expenses</text>
         </question>
-        <response>This is in the same place as the timesheets Use the CGI portal, Tools then Local Tools and then Timesheets and expenses.
+        <response>This is in the same place as the timesheets Use the CGI portal, *Tools* then *Local Tools* and then *Timesheets and expenses*.
         </response>
     </template>
     <template>
@@ -147,7 +147,7 @@
             <text>holiday</text>
             <text>time off</text>
         </question>
-        <response>You can book leave or time off through the HR portal. There are sections there covering illness, bereavement and extended absences. Open your browser on the CGI portal select Tools then select HR service centre.
+        <response>You can book leave or time off through the HR portal. There are sections there covering illness, bereavement and extended absences. Open your browser on the CGI portal select *Tools* then select *HR service centre*.
         </response>
     </template>
     <template>
