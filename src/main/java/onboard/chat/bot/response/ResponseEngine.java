@@ -41,7 +41,7 @@ public class ResponseEngine {
         log.info("Handling reply to incoming message");
         val incomingText = message.event.text.toLowerCase();
 
-        if (message.event.type.equals("message") && message.event.subtype == null) {
+        if (message.event.type.contains("app_mention")) {
             if (incomingText.contains("help")) {
                 ResponseHandler.replyToHelp(slack, message, channel, ChatResponses.HELP_RESPONSE);
             } else if (incomingText.contains("thank")) {
