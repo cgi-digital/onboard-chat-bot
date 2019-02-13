@@ -3,7 +3,7 @@ package onboard.chat.bot.response;
 import com.github.seratch.jslack.Slack;
 import com.github.seratch.jslack.api.methods.SlackApiException;
 import com.github.seratch.jslack.api.methods.request.conversations.ConversationsCloseRequest;
-import com.github.seratch.jslack.api.methods.response.chat.ChatPostEphemeralResponse;
+import com.github.seratch.jslack.api.methods.response.chat.ChatPostMessageResponse;
 import com.github.seratch.jslack.api.model.Channel;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -53,9 +53,10 @@ public class ResponseEngine {
                 ResponseHandler.sendReply(slack, message, channel, ChatResponses.HUMAN_RESPONSE);
             } else {
                 val questionType = new QuestionType();
-                ChatPostEphemeralResponse response = questionType.filterAndRespond(slack, message, channel, incomingText);
+                ChatPostMessageResponse response = questionType.filterAndRespond(slack, message, channel, incomingText);
                 if (!response.isOk()) {
                     ResponseHandler.sendReply(slack, message, channel, ChatResponses.UNABLE_TO_ANSWER);
+                    log.info("Recorded an error in the bot, this is related to a question that could not be answered {}", response.getError());
                 }
             }
         }

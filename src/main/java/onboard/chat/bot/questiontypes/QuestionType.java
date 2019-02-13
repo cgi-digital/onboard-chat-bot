@@ -2,7 +2,7 @@ package onboard.chat.bot.questiontypes;
 
 import com.github.seratch.jslack.Slack;
 import com.github.seratch.jslack.api.methods.SlackApiException;
-import com.github.seratch.jslack.api.methods.response.chat.ChatPostEphemeralResponse;
+import com.github.seratch.jslack.api.methods.response.chat.ChatPostMessageResponse;
 import com.github.seratch.jslack.api.model.Channel;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -42,7 +42,7 @@ public class QuestionType {
      * @param incomingText The incoming text which contains the keywords to be searched for
      * @return ChatPostEphemeralResponse the chat response object returned to the caller
      */
-    public ChatPostEphemeralResponse filterAndRespond(Slack slack, IncomingMessage message, Channel channel, String incomingText) {
+    public ChatPostMessageResponse filterAndRespond(Slack slack, IncomingMessage message, Channel channel, String incomingText) {
         val resource = new File("./resources/resources.xml").getAbsoluteFile();
 
         ClassLoader classLoader = getClass().getClassLoader();
@@ -72,6 +72,6 @@ public class QuestionType {
         } catch (JAXBException ex) {
             log.info("Exception: {}", ex.getMessage());
         }
-        return new ChatPostEphemeralResponse();
+        return new ChatPostMessageResponse();
     }
 }
