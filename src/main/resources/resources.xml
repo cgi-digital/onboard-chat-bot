@@ -39,10 +39,10 @@
     <template>
         <question>
             <text>courses</text>
-            <text>skillsport</text>
+            <text>skillport</text>
             <text>plurasight</text>
         </question>
-        <response>For accessing courses and providers like skillsport Again open your web browser and navigate to the CGI portal Click the Tools tab then click the Learning tools link This will redirect you to the learning landing page
+        <response>For accessing courses and providers like skillport Again open your web browser and navigate to the CGI portal Click the Tools tab then click the Learning tools link This will redirect you to the learning landing page
         </response>
     </template>
     <template>
