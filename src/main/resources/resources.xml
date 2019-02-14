@@ -157,4 +157,12 @@
         <response>In most cases I can answer your questions, if there is a dedicated channel for the team you are onboarding to and I have specific information then I'll notice and send the information directly to you when you join the channel. In other cases you seek help or advice from your buddy as the first point of contact.
         </response>
     </template>
+    <template>
+        <question>
+            <text>webex</text>
+            <text>video conferencing</text>
+        </question>
+        <response>To set up a webex account you'll need to raise an issue with IT, you can follow the links using the CGI portal *CynerGI* *Tools* *Conferencing Solutions* and select the _CGI Conferencing_ link
+        </response>
+    </template>
 </resources>
